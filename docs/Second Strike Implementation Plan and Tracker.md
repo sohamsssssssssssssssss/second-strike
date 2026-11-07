@@ -241,3 +241,10 @@ Codex approved the two read-only gate command permission cards under the user-au
 - [x] Re-checked in the repo: 5/5 raw hashes match `log.jsonl`, `check_fees.py` replays every verdict as pass, the report regenerates identically.
 - [x] README: new headline, three-row results table, comparison-arm section and caveats; the no-comparison-arm caveat replaced with this result. Generic retry remains untested.
 - [x] DEMO: earlier quant-desk shot cut; now 95 s.
+
+## 22. 7 Nov 2026 — Switch-first README, templates, smoke test, publish
+
+- [x] README: Switch-first headline, "How Switch is used", "What we learned" (Instructions finding + three-row table), "Reproduce live (Switch)", live room smoke test. All caveats kept.
+- [x] `templates/rescue-room.md` added; `templates/gate-agent-instructions.md` and `templates/worker-instructions.md` (from Claude chat) committed.
+- [x] `eval/auto/` (n=1 smoke test: worker self-triggered gate, chat revoke) re-checked: raw hash matches, verdict replays pass. Absolute gate path in `events.jsonl` replaced with `<gate-dir>`.
+- [x] Public repo created and `main` pushed.

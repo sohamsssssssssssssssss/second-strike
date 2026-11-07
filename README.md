@@ -1,8 +1,22 @@
 # Second Strike
 
-**Rules in room Instructions don’t reach agents. Second Strike enforces approved rules at the gate and feeds the exact rule back when a task misses it, with every output checked.**
+**Second Strike: a Switch room where a human approves a rule once and a gate agent enforces it on every agent's work. Worker first try 0/5 → 5/5 after one gate strike.**
 
-Room Instructions alone: 0/5. With the gate: 0/5 first try → 5/5 after one gate strike. Rule and schema in the prompt, no gate: 5/5. n=5, one worker, one model; see [Results](#results) for caveats.
+n=5, one worker, one model, gate triggered by a human mention. See [Results](#results) for caveats and [What we learned](#what-we-learned).
+
+## How Switch is used
+
+| Switch piece | In Second Strike |
+| --- | --- |
+| Agents | `worker-b` (Codex gpt-6-luna), `worker-a` (Codex gpt-6.1-sol), `gate` (Codex), `scribe` (Codex). Gate and scribe model IDs are not recorded. |
+| Rooms (Mattermost channels) | `quant-desk` (correction, scribe draft, approval), `rescue` (second-strike run), `clean-treat` / `clean-control` (clean matched run), `schema-arm` (comparison arm), `quant-desk-live` (smoke test) |
+| Human | Rejects the ledger, approves R1 in chat (message `dx95znbbq7dtixxhouksnsomnh`), sends tasks, triggers `@gate check Vn attempt K`, revokes with `@gate revoke R1` |
+| Gate agent | Lives in the room. On a mention it saves the worker's reply verbatim, runs `harness/gate_reply.py` (hash, extract, `checkers/gate.py`), and posts the verdict. On fail or escalate it mentions the worker with the exact error, schema, and R1 text |
+| Room Instructions | Carry the approved R1 text |
+
+Setup files: [templates/gate-agent-instructions.md](templates/gate-agent-instructions.md), [templates/worker-instructions.md](templates/worker-instructions.md), [templates/rescue-room.md](templates/rescue-room.md).
+
+Without Switch there is no shared room where the correction, the human approval, and the gate verdicts sit in one thread. There is no gate agent inside the conversation to send the rule back to the worker. And there is no approval trail tying R1 to a human message.
 
 Status: prototype. Synthetic backtest ledgers only. The live paired study is incomplete. Earlier history is in [docs/README-history.md](docs/README-history.md).
 
@@ -84,9 +98,24 @@ cat rules/events.jsonl
 
 Without `--now`, the gate uses the current clock. After 30 Nov 2026 the rule reports `expired`.
 
+## Reproduce live (Switch)
+
+1. Install Switch and sign in to the Codex provider in the Switch Console.
+2. Create two agents on This computer: `worker-b` (Codex gpt-6-luna) and `gate` (Codex). Give the gate a working directory `<gate-dir>`, and copy `rules/R1.json` into it.
+3. Paste [templates/worker-instructions.md](templates/worker-instructions.md) (base text) into worker-b. Paste [templates/gate-agent-instructions.md](templates/gate-agent-instructions.md) into the gate, with `<repo>` and `<gate-dir>` filled in.
+4. Create the room `rescue` as described in [templates/rescue-room.md](templates/rescue-room.md), with R1 in the room Instructions.
+5. Send `tasks/seeded/variant-01.txt` to `@worker-b`, verbatim.
+6. Post `@gate check V1 attempt 1`. If the verdict is fail or escalate, the gate mentions worker-b with the error, schema, and R1 text.
+7. After worker-b resubmits, post `@gate check V1 attempt 2`.
+8. `python3 harness/rescue_report.py <gate-dir>/eval/rescue/log.jsonl` prints the per-attempt table.
+
+Agent replies vary. Expect the loop to run, not identical verdicts.
+
 ## Results
 
-**Headline:** Rules in room Instructions don’t reach agents. Second Strike enforces approved rules at the gate and feeds the exact rule back when a task misses it, with every output checked.
+### What we learned
+
+Rules in room Instructions don’t reach agents. Second Strike enforces approved rules at the gate and feeds the exact rule back when a task misses it, with every output checked.
 
 | Run | Where R1 reached the worker | Fees and schema correct |
 | --- | --- | --- |
@@ -153,6 +182,15 @@ Caveats (from `eval/schema/results.md`):
 - The gate's instructions were edited before grading to accept a run name.
 - Same caveats as the rescue run: human-triggered gate, raw text as the agent copied it, one worker, one model, n=5.
 
+### Live room smoke test, 7 Nov 2026, 21:42–21:45 IST (`eval/auto/`)
+
+n=1. A smoke test of the chat-native loop, not an experiment. Room `quant-desk-live`: worker-a, worker-b, gate, and Soham, with R1 in the room Instructions. The worker instructions end with the auto-trigger line from `templates/worker-instructions.md`.
+
+- Soham sent V1 to worker-a. worker-a posted a ledger, then posted "@gate run auto check V1 attempt 1" itself, with no human trigger. Gate verdict: pass. worker-a included fees on its first try; n=1, no claim.
+- Soham posted "@gate revoke R1". The gate ran `gate.py --revoke` on its R1 copy and posted `{"rule_id":"R1","status":"revoked","by":"user"}` (`R1.revoked-test.json`, `events.jsonl`).
+- The gate's R1 copy was restored to active afterwards, from a backup taken before the revoke, for the demo recording. The repo's `rules/R1.json` was not touched.
+- Re-checked in the repo: the raw sha256 matches `log.jsonl`, and `check_fees.py` replays pass. The absolute gate path in `events.jsonl` is replaced with `<gate-dir>`.
+
 ### Clean matched run, 7 Nov 2026 (`eval/clean/results.md`)
 
 Prompts are `tasks/seeded/variant-0n.txt`, sent once each, with no retries or hints. Treatment and control use fresh rooms. Both use gpt-6-luna, both have auto mode off, and both use the same sender. The treatment room has R1 in its Instructions. The control room's Instructions are blank. That is the only intended difference.
@@ -197,10 +235,11 @@ Preliminary (from `eval/results.md`). Not a matched comparison. No causal claim.
 - Both workers are Codex on different models. This is same vendor, not cross-vendor.
 - The checker validates per-trade fees only. It does not check net return, `traded_value`, provenance, or strategy quality. Example: V4 control reports traded_value 906 against trade notionals totalling 905, which the checker does not catch.
 - Synthetic data only. No real backtest returns.
-- Lifecycle (expiry, revoke) is custom. `gate.py` enforces it; the room Instructions do not. Switch's native command registry has no `revoke`. Revoke in chat is not implemented.
+- Lifecycle (expiry, revoke) is custom. `gate.py` enforces it; the room Instructions do not. Switch's native command registry has no `revoke`. Chat revoke works only through the gate agent (`@gate revoke R1`), shown once in the smoke test.
 - Human approval is a chat message reference. `rules/R1.json` is a custom record, not a native Switch Rule or Decision.
 - `hits` counts gate failures only. Overrides are not implemented.
-- The gate agent runs only when a human mentions it. It is not triggered automatically by a worker's reply.
+- In the clean, rescue, and schema runs, the gate ran only when a human mentioned it. A worker triggered the gate itself once (smoke test, n=1).
+- Gate and scribe model IDs are not recorded.
 - `rules/R1.json` and `events.jsonl` have no signing or auth. Anyone with the repo can edit them.
 - Not a general reliability guarantee. Rules do not prevent repeat mistakes.
 
@@ -216,7 +255,7 @@ Preliminary (from `eval/results.md`). Not a matched comparison. No causal claim.
 - Matched five-pair study.
 - Export, hash, and grade the clean-run raw payloads into `eval/clean/raw/`.
 - Clean control with the correction thread visible in the fresh room, to test the thread reading directly.
-- Gate triggered automatically on each worker reply, without a human mention.
+- Worker-triggered gate at n>1 (shown once in `eval/auto/`).
 - Generic-retry comparison arm for the second strike.
 - Mattermost API export of the rescue replies, reconciled with `eval/rescue/raw/`.
 
@@ -238,6 +277,8 @@ Preliminary (from `eval/results.md`). Not a matched comparison. No causal claim.
 | `eval/rescue/log.jsonl`, `eval/rescue/raw/` | Per-attempt verdicts and hashes; the 10 raw replies |
 | `eval/rescue/R1.after.json` | The gate's R1 copy after the run |
 | `eval/schema/` | Comparison arm: results, report, log, and the 5 raw replies |
+| `eval/auto/` | Live room smoke test (n=1): worker self-trigger, chat revoke |
+| `templates/gate-agent-instructions.md`, `templates/worker-instructions.md`, `templates/rescue-room.md` | Switch agent instructions and room setup |
 | `eval/frozen_hashes.txt`, `eval/live_hashes.txt` | SHA-256 manifests |
 | `templates/` | Switch room templates |
 | `docs/` | Product, technical, flow, schema, tracker, and rules docs; `README-history.md` |

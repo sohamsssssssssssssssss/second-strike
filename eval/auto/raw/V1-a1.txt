@@ -1,0 +1,53 @@
+```json
+{
+  "id": "worker-a-T-V1-001",
+  "task_id": "T-V1",
+  "agent": "worker-a",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "equal-weight equity rotation",
+  "assumptions": [
+    "Synthetic illustration only; no backtest or trades were executed.",
+    "One monthly rotation replaces two existing fictional equities with two preselected fictional equities; selection signals are assumed, not calculated.",
+    "Opening holdings: 100 SYN_OLD_A at 50 and 200 SYN_OLD_B at 25, plus 10 cash in fictional currency units.",
+    "Sell all opening equities, then allocate 5000 to each replacement equity, giving each 50% of ending equity value.",
+    "All prices are invented; no price movement, slippage, taxes or dividends. Fees are 0.0005 times qty times price, paid from the 10 cash reserve.",
+    "traded_value is gross absolute turnover: sum of qty times price for buys and sells, excluding fees."
+  ],
+  "trades": [
+    {
+      "id": "V1-01",
+      "symbol": "SYN_OLD_A",
+      "side": "sell",
+      "qty": 100,
+      "price": 50,
+      "fee": 2.5
+    },
+    {
+      "id": "V1-02",
+      "symbol": "SYN_OLD_B",
+      "side": "sell",
+      "qty": 200,
+      "price": 25,
+      "fee": 2.5
+    },
+    {
+      "id": "V1-03",
+      "symbol": "SYN_NEW_A",
+      "side": "buy",
+      "qty": 125,
+      "price": 40,
+      "fee": 2.5
+    },
+    {
+      "id": "V1-04",
+      "symbol": "SYN_NEW_B",
+      "side": "buy",
+      "qty": 250,
+      "price": 20,
+      "fee": 2.5
+    }
+  ],
+  "traded_value": 20000
+}
+```

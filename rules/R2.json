@@ -1,0 +1,15 @@
+{
+  "id": "R2",
+  "status": "draft",
+  "what": "A ledger's traded_value must equal the sum of qty * price over all trades, within an absolute tolerance of 0.01.",
+  "why": "Example second rule. Motivated by eval/ledgers/variant-04-control-first.json, which reports traded_value 906 while its trades sum to 905.",
+  "scope": "Synthetic backtest ledgers; checks the top-level traded_value only.",
+  "expiry": "2026-11-30T00:00:00+05:30",
+  "checker": "checkers/check_traded_value.py",
+  "approved_by": null,
+  "hits": 0,
+  "last_fired": null,
+  "revoked_at": null,
+  "revoked_by": null,
+  "implementation": "Second Strike custom record. Status draft: not approved by a human, so the gate does not enforce it (state inactive -> not_enforced) until a human sets status active."
+}

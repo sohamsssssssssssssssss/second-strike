@@ -1,0 +1,6 @@
+{"ts": "2026-11-07T22:08:03+05:30", "variant": "V1", "attempt": 1, "sha256": "3859a18c9d26b30c9d6bebf5c73dd9f71ea3f3fe4dc9c784137ce86f84f059e9", "verdict": "escalate", "rule_state": "active", "offending": [], "error": "Trade IDs must be unique strings or integers"}
+{"ts": "2026-11-07T22:08:31+05:30", "variant": "V1", "attempt": 2, "sha256": "1aa584c30cca2a10b1ab959e50e4ffe917d1c4b056727bcf3caf2eef5b08c5ce", "verdict": "pass", "rule_state": "active", "offending": []}
+{"ts": "2026-11-07T22:08:51+05:30", "variant": "V2", "attempt": 1, "sha256": "89b2fbed56ac9ff3d04a5ac0a3a9ac43afe3ac74b68a6555af059dfcb7bba2ab", "verdict": "pass", "rule_state": "active", "offending": []}
+{"ts": "2026-11-07T22:10:25+05:30", "variant": "V3", "attempt": 1, "sha256": "3ed4c3804f34162b62b58face8564b48a014d388c3a381576bee6c5a9533f1ca", "verdict": "pass", "rule_state": "active", "offending": []}
+{"ts": "2026-11-07T22:11:58+05:30", "variant": "V4", "attempt": 1, "sha256": "d66c3148a2101d632b337887564c4331920f567916e0b8ec730581b6e8a6ee57", "verdict": "pass", "rule_state": "active", "offending": []}
+{"ts": "2026-11-07T22:13:36+05:30", "variant": "V5", "attempt": 1, "sha256": "026b291fcb44ea1e1e9d7e88482714cd1c4627db92719da8b14614b99a3aa014", "verdict": "pass", "rule_state": "active", "offending": []}

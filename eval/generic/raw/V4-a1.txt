@@ -1,0 +1,38 @@
+```json
+{
+  "id": "LEDGER-T-V4-001",
+  "task_id": "T-V4",
+  "agent": "control-worker-fresh",
+  "provider": "codex",
+  "model": "unknown",
+  "strategy": "Synthetic mean-reversion basket: reduce a fictional holding assumed above its reference mean and allocate proceeds equally by value to two fictional holdings assumed below their reference means.",
+  "assumptions": [
+    "Symbols and values are fictional and illustrative; the mean signals are assumed and were not calculated from market data.",
+    "A starting position of 4 ZETA shares is available to sell.",
+    "The proceeds are reinvested equally by value: 2 RIVR shares at 25.00 and 1 KORU share at 50.00.",
+    "No trade execution, fees, taxes, or slippage are represented.",
+    "traded_value is gross notional across buys and sells, calculated as the sum of quantity multiplied by price."
+  ],
+  "trades": [
+    {
+      "symbol": "ZETA",
+      "side": "sell",
+      "quantity": 4,
+      "price": 25.00
+    },
+    {
+      "symbol": "RIVR",
+      "side": "buy",
+      "quantity": 2,
+      "price": 25.00
+    },
+    {
+      "symbol": "KORU",
+      "side": "buy",
+      "quantity": 1,
+      "price": 50.00
+    }
+  ],
+  "traded_value": 200.00
+}
+```

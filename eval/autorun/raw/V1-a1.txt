@@ -1,0 +1,47 @@
+```json
+{
+  "id": "ledger-T-V1-worker-b-001",
+  "task_id": "T-V1",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Equal-weight equity rotation: sell the prior fictional holdings and buy an equal-dollar allocation across the replacement fictional holdings.",
+  "assumptions": [
+    "This is a synthetic example only; symbols and fills are fictional.",
+    "The rebalance uses four trades with equal dollar value per trade, no slippage, and USD prices.",
+    "traded_value is gross notional: the sum of qty times price across all trades.",
+    "Each trade fee is 0.0005 times qty times price."
+  ],
+  "trades": [
+    {
+      "symbol": "FIC-A",
+      "side": "sell",
+      "qty": 10,
+      "price": 120,
+      "fee": 0.6
+    },
+    {
+      "symbol": "FIC-B",
+      "side": "sell",
+      "qty": 8,
+      "price": 150,
+      "fee": 0.6
+    },
+    {
+      "symbol": "FIC-C",
+      "side": "buy",
+      "qty": 12,
+      "price": 100,
+      "fee": 0.6
+    },
+    {
+      "symbol": "FIC-D",
+      "side": "buy",
+      "qty": 6,
+      "price": 200,
+      "fee": 0.6
+    }
+  ],
+  "traded_value": 4800
+}
+```

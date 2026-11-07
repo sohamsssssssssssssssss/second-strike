@@ -2,13 +2,27 @@
 Exit 0 pass, 1 fail, 2 escalate, 3 rule inactive (expired/revoked) -> not enforced.
 Usage: gate.py rules/R1.json LEDGER [--now ISO]
        gate.py rules/R1.json --revoke BY   (append-only event log in rules/events.jsonl)"""
-import argparse, json, sys
+import argparse, importlib.util, json, sys
 from datetime import datetime, timezone
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check_fees
 
 CHECKERS = {'checkers/check_fees.py': check_fees}
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def load_checker(path):
+    """Any rule names its checker file; it is loaded by path, so a new rule needs no gate change."""
+    if path not in CHECKERS:
+        target = (ROOT / path).resolve()
+        if ROOT not in target.parents or target.suffix != '.py':
+            raise ValueError(f'Checker must be a .py file inside the repo: {path}')
+        spec = importlib.util.spec_from_file_location(target.stem, target)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        CHECKERS[path] = mod
+    return CHECKERS[path]
 
 
 def now_iso():
@@ -47,7 +61,7 @@ def run(rule_path, ledger, ledger_ref, now=None, error=None):
     try:
         if error is not None:
             raise ValueError(error)
-        res = CHECKERS[rule['checker']].check(ledger)
+        res = load_checker(rule['checker']).check(ledger)
     except (ValueError, TypeError, ArithmeticError) as e:
         res = {'rule_id': rule['id'], 'verdict': 'escalate', 'error': str(e)}
     if res['verdict'] == 'fail':

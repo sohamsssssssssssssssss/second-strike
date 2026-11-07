@@ -1,0 +1,35 @@
+```json
+{
+  "id": "ledger-T-V3-worker-b-001",
+  "task_id": "T-V3",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Two-asset equal-weight rebalance: sell part of the overweight fictional holding and allocate the proceeds to the underweight fictional holding.",
+  "assumptions": [
+    "Synthetic example only; both symbols and fills are fictional.",
+    "The rebalance sells and buys equal gross dollar amounts; prices are in USD and there is no slippage.",
+    "traded_value is gross notional, the sum of qty times price across trades.",
+    "Each fee is 0.0005 times qty times price."
+  ],
+  "trades": [
+    {
+      "id": "T-V3-001",
+      "symbol": "FIC-AST",
+      "side": "sell",
+      "qty": 5,
+      "price": 100,
+      "fee": 0.25
+    },
+    {
+      "id": "T-V3-002",
+      "symbol": "FIC-BRY",
+      "side": "buy",
+      "qty": 10,
+      "price": 50,
+      "fee": 0.25
+    }
+  ],
+  "traded_value": 1000
+}
+```

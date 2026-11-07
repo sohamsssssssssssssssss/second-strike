@@ -1,0 +1,32 @@
+```json
+{
+  "id": "LEDGER-T-V3-001",
+  "task_id": "T-V3",
+  "agent": "control-worker-fresh",
+  "provider": "codex",
+  "model": "unknown",
+  "strategy": "Synthetic two-asset rebalance: shift a fictional portfolio from a 70/30 allocation to a 50/50 allocation.",
+  "assumptions": [
+    "Symbols and values are fictional and illustrative; both assets are priced at 50.00 per share.",
+    "Starting holdings are 14 shares of AXIO and 6 shares of BRIO, for a total illustrative value of 1000.00.",
+    "Sell 4 AXIO shares and use the proceeds to buy 4 BRIO shares, leaving 10 shares of each asset.",
+    "No market data, execution, fees, taxes, or slippage are represented.",
+    "traded_value is gross notional across buys and sells: the sum of quantity multiplied by price."
+  ],
+  "trades": [
+    {
+      "symbol": "AXIO",
+      "side": "sell",
+      "quantity": 4,
+      "price": 50.00
+    },
+    {
+      "symbol": "BRIO",
+      "side": "buy",
+      "quantity": 4,
+      "price": 50.00
+    }
+  ],
+  "traded_value": 400.00
+}
+```

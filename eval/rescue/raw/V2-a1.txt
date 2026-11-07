@@ -1,0 +1,19 @@
+```json
+{
+  "id": "ledger-T-V2-001",
+  "task_id": "T-V2",
+  "agent": "worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "Single-asset momentum",
+  "assumptions": [
+    "Fictional asset PULSAR showed positive momentum over the illustrative lookback period and is bought for a one-period holding.",
+    "The ledger represents a synthetic entry only; no market data or real execution is involved.",
+    "traded_value is gross quantity multiplied by price, excluding fees."
+  ],
+  "trades": [
+    {"symbol": "PULSAR", "side": "buy", "quantity": 12, "price": 42.5}
+  ],
+  "traded_value": 510.0
+}
+```

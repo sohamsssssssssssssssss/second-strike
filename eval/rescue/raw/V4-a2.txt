@@ -1,0 +1,20 @@
+```json
+{
+  "id": "ledger-T-V4-001",
+  "task_id": "T-V4",
+  "agent": "worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "Mean-reversion basket",
+  "assumptions": [
+    "Fictional assets MICA and SOLEN are assumed below their illustrative short-term means, so the synthetic basket buys both.",
+    "Prices and quantities are illustrative only; this ledger does not represent real market data or execution.",
+    "traded_value is the gross sum of qty times price, excluding fees."
+  ],
+  "trades": [
+    {"id": "T-V4-001", "symbol": "MICA", "side": "buy", "qty": 8, "price": 25.0, "fee": 0.10},
+    {"id": "T-V4-002", "symbol": "SOLEN", "side": "buy", "qty": 5, "price": 40.0, "fee": 0.10}
+  ],
+  "traded_value": 400.0
+}
+```

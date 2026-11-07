@@ -226,3 +226,11 @@ Codex approved the two read-only gate command permission cards under the user-au
 - [x] `eval/rescue/R1.before.json` snapshot taken (hits 0, sha256 `72ecb19f…3dd3`).
 - [ ] Phase B–D (Switch gate agent, rescue run, raw export) — owned by Claude (chat). No rescue results exist yet.
 - [ ] Phase E README/DEMO results — waits for `eval/rescue/log.jsonl`.
+
+## 20. 7 Nov 2026 — Phase E: second-strike results in README/DEMO
+
+- [x] Rescue run recorded by Claude (chat) in `eval/rescue/`: first-try pass 0/5, pass by second strike 5/5 (`report.md`).
+- [x] Re-checked in the repo: 10/10 raw hashes match `log.jsonl`, `check_fees.py` replays every verdict, the report regenerates identically, and `R1.after.json` matches the before snapshot (hits 0; escalations are not fee hits).
+- [x] README headline, loop steps, diagram, rescue results, and the caveats from `eval/rescue/results.md` added. Added a no-comparison-arm caveat.
+- [x] DEMO: terminal gate shot replaced with the live rescue-room loop; CLI revoke shot kept; now 105 s.
+- [ ] Mattermost API export (clean and rescue) still pending.

@@ -1,0 +1,20 @@
+```json
+{
+  "id": "ledger-T-V4-001",
+  "task_id": "T-V4",
+  "agent": "worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "Mean-reversion basket",
+  "assumptions": [
+    "Fictional assets MICA and SOLEN are assumed to be below their illustrative short-term means, so the basket takes long positions in both.",
+    "This is a synthetic one-period entry with fictional prices and quantities; no real market data or execution is involved.",
+    "traded_value is gross quantity multiplied by price, excluding fees."
+  ],
+  "trades": [
+    {"symbol": "MICA", "side": "buy", "quantity": 8, "price": 25.0},
+    {"symbol": "SOLEN", "side": "buy", "quantity": 5, "price": 40.0}
+  ],
+  "traded_value": 400.0
+}
+```

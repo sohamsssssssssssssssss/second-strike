@@ -1,0 +1,20 @@
+```json
+{
+  "id": "ledger-T-V5-001",
+  "task_id": "T-V5",
+  "agent": "worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "Cash-neutral synthetic pairs",
+  "assumptions": [
+    "Fictional pair: long AUREL and short BRIN, with matched gross notionals of 300 each at illustrative prices.",
+    "The two legs offset in cash before fees; traded_value is total gross notional across both legs, excluding fees.",
+    "Symbols, quantities, and prices are synthetic; no real market data or execution is involved."
+  ],
+  "trades": [
+    {"id": "T-V5-001", "symbol": "AUREL", "side": "buy", "qty": 10, "price": 30.0, "fee": 0.15},
+    {"id": "T-V5-002", "symbol": "BRIN", "side": "sell", "qty": 6, "price": 50.0, "fee": 0.15}
+  ],
+  "traded_value": 600.0
+}
+```

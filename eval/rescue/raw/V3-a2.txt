@@ -1,0 +1,20 @@
+```json
+{
+  "id": "ledger-T-V3-001",
+  "task_id": "T-V3",
+  "agent": "worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "Two-asset rebalance",
+  "assumptions": [
+    "Fictional portfolio is rebalanced toward equal dollar weights in LUMEN and VECTRA.",
+    "Illustrative prices are 60.0 per share for both assets; the rebalance sells 2 shares of LUMEN and buys 2 shares of VECTRA.",
+    "traded_value is gross quantity multiplied by price, excluding fees; no real market data or execution is involved."
+  ],
+  "trades": [
+    {"id": "T-V3-001", "symbol": "LUMEN", "side": "sell", "qty": 2, "price": 60.0, "fee": 0.06},
+    {"id": "T-V3-002", "symbol": "VECTRA", "side": "buy", "qty": 2, "price": 60.0, "fee": 0.06}
+  ],
+  "traded_value": 240.0
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+  "id": "ledger-T-V1-001",
+  "task_id": "T-V1",
+  "agent": "worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "Equal-weight fictional equity rotation",
+  "assumptions": [
+    "Illustrative one-period rebalance from fictional holdings OLD1 and OLD2 into fictional targets NOVA and ORBIT.",
+    "Target names receive equal dollar allocations; whole-share quantities are used, so allocations may differ slightly due to rounding.",
+    "Sells are listed before buys. traded_value is gross sum of qty times price, excluding fees."
+  ],
+  "trades": [
+    {"id": "T-V1-001", "symbol": "OLD1", "side": "sell", "qty": 10, "price": 50.0, "fee": 0.25},
+    {"id": "T-V1-002", "symbol": "OLD2", "side": "sell", "qty": 5, "price": 100.0, "fee": 0.25},
+    {"id": "T-V1-003", "symbol": "NOVA", "side": "buy", "qty": 10, "price": 50.0, "fee": 0.25},
+    {"id": "T-V1-004", "symbol": "ORBIT", "side": "buy", "qty": 5, "price": 100.0, "fee": 0.25}
+  ],
+  "traded_value": 2000.0
+}
+```

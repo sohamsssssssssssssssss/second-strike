@@ -1,8 +1,8 @@
 # Second Strike
 
-Room Instructions alone did not carry a human correction to agents (0/5 vs 0/5, clean matched run). Second Strike enforces human-approved, revocable rules at a deterministic gate instead.
+**Rules in room Instructions don’t reach agents. Second Strike enforces approved rules at the gate and feeds the exact rule back when a task misses it, with every output checked.**
 
-**Room Instructions alone: 0/5 (clean matched run). With the Second Strike gate: 0/5 first try → 5/5 after one gate strike.** n=5, one worker, one model; see [Results](#results) for caveats.
+Room Instructions alone: 0/5. With the gate: 0/5 first try → 5/5 after one gate strike. Rule and schema in the prompt, no gate: 5/5. n=5, one worker, one model; see [Results](#results) for caveats.
 
 Status: prototype. Synthetic backtest ledgers only. The live paired study is incomplete. Earlier history is in [docs/README-history.md](docs/README-history.md).
 
@@ -86,7 +86,13 @@ Without `--now`, the gate uses the current clock. After 30 Nov 2026 the rule rep
 
 ## Results
 
-**Headline:** Room Instructions alone: 0/5 (clean matched run). With the Second Strike gate: 0/5 first try → 5/5 after one gate strike.
+**Headline:** Rules in room Instructions don’t reach agents. Second Strike enforces approved rules at the gate and feeds the exact rule back when a task misses it, with every output checked.
+
+| Run | Where R1 reached the worker | Fees and schema correct |
+| --- | --- | --- |
+| Clean matched run (`eval/clean/`) | Room Instructions only | 0/5 (control 0/5) |
+| Second-strike run (`eval/rescue/`) | Room Instructions, then gate feedback on failure | 0/5 first try → 5/5 after one strike |
+| Comparison arm (`eval/schema/`) | Room Instructions plus rule and schema in the prompt; no gate feedback | 5/5 first try |
 
 Observed, not causal. n=5, one worker, one model. Caveats are listed under each run.
 
@@ -121,7 +127,31 @@ Caveats (from `eval/rescue/results.md`):
 - `R1.after.json` is that copy after the run. It has hits 0, because escalations do not count as fee hits.
 - An earlier V1 gate trigger failed (PermissionError on mkdir; nothing saved), and another was stopped at an approval prompt. Neither produced a graded record.
 - Same worker, same model, n=5. This shows the loop works, not general reliability.
-- No comparison arm: a generic "try again", or the same schema in the first prompt, was not tested. The feedback includes the full per-trade schema, which the task prompt does not, so the schema alone may explain the fix.
+- The same rule and schema text in the first prompt, with no gate feedback, also gave 5/5 (comparison arm below). So this run does not show the gate loop beats telling the worker up front. What the gate adds is delivery on failure, without relying on each requester to write the rule into the prompt, and a deterministic check of every output. A generic "try again" was not tested.
+
+### Comparison arm: rule and schema in the prompt, 7 Nov 2026, 19:57–20:15 IST (`eval/schema/`)
+
+A new room, `schema-arm`, with worker-b only during generation, R1 in the room Instructions, and no gate. Prompt: `tasks/seeded/variant-0n.txt` verbatim plus the gate's failure text: "Each trade needs: id (unique), symbol, side (buy|sell), qty > 0, price > 0, fee. R1: Each synthetic backtest trade must include a fee equal to 0.0005 * qty * price, within an absolute tolerance of 0.01." After all 5 replies, the gate was added and graded each first reply (run `schema`, no feedback to the worker).
+
+`python3 harness/rescue_report.py eval/schema/log.jsonl`:
+
+| Variant | Attempt 1 | Attempt 2 |
+| --- | --- | --- |
+| V1 | pass | — |
+| V2 | pass | — |
+| V3 | pass | — |
+| V4 | pass | — |
+| V5 | pass | — |
+
+first-try pass 5/5, pass by second strike 5/5
+
+- Verification, re-checked independently on 7 Nov: all 5 raw hashes match `log.jsonl`, `check_fees.py` replays every verdict as pass, every trade has `id`, `qty`, and `fee`, and the report regenerates identically.
+- Without a gate, nobody checks these outputs; the pass grades here were added after generation.
+
+Caveats (from `eval/schema/results.md`):
+- The first gate trigger used the rescue run name and was refused (exit 4, nothing overwritten). That trigger message contained "@worker-b", which pinged worker-b. Any reply it made is not graded.
+- The gate's instructions were edited before grading to accept a run name.
+- Same caveats as the rescue run: human-triggered gate, raw text as the agent copied it, one worker, one model, n=5.
 
 ### Clean matched run, 7 Nov 2026 (`eval/clean/results.md`)
 
@@ -187,7 +217,7 @@ Preliminary (from `eval/results.md`). Not a matched comparison. No causal claim.
 - Export, hash, and grade the clean-run raw payloads into `eval/clean/raw/`.
 - Clean control with the correction thread visible in the fresh room, to test the thread reading directly.
 - Gate triggered automatically on each worker reply, without a human mention.
-- Comparison arms for the second strike: a generic retry, and the schema in the first prompt.
+- Generic-retry comparison arm for the second strike.
 - Mattermost API export of the rescue replies, reconciled with `eval/rescue/raw/`.
 
 ## Files
@@ -207,8 +237,9 @@ Preliminary (from `eval/results.md`). Not a matched comparison. No causal claim.
 | `eval/rescue/results.md`, `report.md` | Second-strike run: setup, result, verification, caveats; report output |
 | `eval/rescue/log.jsonl`, `eval/rescue/raw/` | Per-attempt verdicts and hashes; the 10 raw replies |
 | `eval/rescue/R1.after.json` | The gate's R1 copy after the run |
+| `eval/schema/` | Comparison arm: results, report, log, and the 5 raw replies |
 | `eval/frozen_hashes.txt`, `eval/live_hashes.txt` | SHA-256 manifests |
 | `templates/` | Switch room templates |
 | `docs/` | Product, technical, flow, schema, tracker, and rules docs; `README-history.md` |
-| `DEMO.md` | 105-second shot list |
+| `DEMO.md` | 95-second shot list |
 | `tests/` | Unit tests |

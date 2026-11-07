@@ -1,0 +1,51 @@
+```json
+{
+  "id": "ledger-T-V1-001",
+  "task_id": "T-V1",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Equal-weight equity rotation (synthetic)",
+  "assumptions": [
+    "Fictional symbols and illustrative fills only; this ledger is not an executed backtest.",
+    "Rotation allocates equal target weights across the selected holdings; trades illustrate a partial rebalance.",
+    "traded_value is the sum of absolute qty * price across all trades.",
+    "Each fee is 0.0005 * qty * price."
+  ],
+  "trades": [
+    {
+      "id": "T-V1-001",
+      "symbol": "FICRA",
+      "side": "buy",
+      "qty": 10,
+      "price": 100,
+      "fee": 0.5
+    },
+    {
+      "id": "T-V1-002",
+      "symbol": "FICRB",
+      "side": "buy",
+      "qty": 20,
+      "price": 50,
+      "fee": 0.5
+    },
+    {
+      "id": "T-V1-003",
+      "symbol": "FICRA",
+      "side": "sell",
+      "qty": 8,
+      "price": 110,
+      "fee": 0.44
+    },
+    {
+      "id": "T-V1-004",
+      "symbol": "FICRC",
+      "side": "buy",
+      "qty": 5,
+      "price": 200,
+      "fee": 0.5
+    }
+  ],
+  "traded_value": 3880
+}
+```

@@ -1,0 +1,51 @@
+```json
+{
+  "id": "ledger-T-V4-001",
+  "task_id": "T-V4",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Mean-reversion basket (synthetic)",
+  "assumptions": [
+    "Fictional symbols and illustrative fills only; this ledger is not an executed backtest.",
+    "The basket buys assets assumed to be below their recent means and sells them after a move toward their means.",
+    "traded_value is the sum of absolute qty * price across all trades.",
+    "Each fee is 0.0005 * qty * price."
+  ],
+  "trades": [
+    {
+      "id": "T-V4-001",
+      "symbol": "MR-BASKET-A",
+      "side": "buy",
+      "qty": 10,
+      "price": 45,
+      "fee": 0.225
+    },
+    {
+      "id": "T-V4-002",
+      "symbol": "MR-BASKET-B",
+      "side": "buy",
+      "qty": 8,
+      "price": 75,
+      "fee": 0.3
+    },
+    {
+      "id": "T-V4-003",
+      "symbol": "MR-BASKET-A",
+      "side": "sell",
+      "qty": 10,
+      "price": 48,
+      "fee": 0.24
+    },
+    {
+      "id": "T-V4-004",
+      "symbol": "MR-BASKET-B",
+      "side": "sell",
+      "qty": 8,
+      "price": 72,
+      "fee": 0.288
+    }
+  ],
+  "traded_value": 1716
+}
+```

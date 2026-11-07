@@ -1,0 +1,35 @@
+```json
+{
+  "id": "ledger-T-V5-001",
+  "task_id": "T-V5",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Cash-neutral synthetic pairs (synthetic)",
+  "assumptions": [
+    "Fictional symbols and illustrative fills only; this ledger is not an executed backtest.",
+    "The pair takes equal dollar exposure on one long leg and one short leg, making net trade notional zero before fees.",
+    "traded_value is gross traded notional: the sum of absolute qty * price across all trades.",
+    "Each fee is 0.0005 * qty * price."
+  ],
+  "trades": [
+    {
+      "id": "T-V5-001",
+      "symbol": "PAIR-LONG-X",
+      "side": "buy",
+      "qty": 10,
+      "price": 100,
+      "fee": 0.5
+    },
+    {
+      "id": "T-V5-002",
+      "symbol": "PAIR-SHORT-Y",
+      "side": "sell",
+      "qty": 20,
+      "price": 50,
+      "fee": 0.5
+    }
+  ],
+  "traded_value": 2000
+}
+```

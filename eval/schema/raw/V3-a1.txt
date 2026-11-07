@@ -1,0 +1,35 @@
+```json
+{
+  "id": "ledger-T-V3-001",
+  "task_id": "T-V3",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Two-asset rebalance (synthetic)",
+  "assumptions": [
+    "Fictional symbols and illustrative fills only; this ledger is not an executed backtest.",
+    "The portfolio is rebalanced toward equal value in two assets: trim an overweight position and add to the underweight position.",
+    "traded_value is the sum of absolute qty * price across all trades.",
+    "Each fee is 0.0005 * qty * price."
+  ],
+  "trades": [
+    {
+      "id": "T-V3-001",
+      "symbol": "REBAL-A",
+      "side": "sell",
+      "qty": 5,
+      "price": 120,
+      "fee": 0.3
+    },
+    {
+      "id": "T-V3-002",
+      "symbol": "REBAL-B",
+      "side": "buy",
+      "qty": 10,
+      "price": 60,
+      "fee": 0.3
+    }
+  ],
+  "traded_value": 1200
+}
+```

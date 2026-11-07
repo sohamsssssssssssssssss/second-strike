@@ -234,3 +234,10 @@ Codex approved the two read-only gate command permission cards under the user-au
 - [x] README headline, loop steps, diagram, rescue results, and the caveats from `eval/rescue/results.md` added. Added a no-comparison-arm caveat.
 - [x] DEMO: terminal gate shot replaced with the live rescue-room loop; CLI revoke shot kept; now 105 s.
 - [ ] Mattermost API export (clean and rescue) still pending.
+
+## 21. 7 Nov 2026 — Comparison arm and public repo
+
+- [x] Comparison arm recorded in `eval/schema/` (rule and schema in the prompt, no gate feedback): first-try pass 5/5.
+- [x] Re-checked in the repo: 5/5 raw hashes match `log.jsonl`, `check_fees.py` replays every verdict as pass, the report regenerates identically.
+- [x] README: new headline, three-row results table, comparison-arm section and caveats; the no-comparison-arm caveat replaced with this result. Generic retry remains untested.
+- [x] DEMO: earlier quant-desk shot cut; now 95 s.

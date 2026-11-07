@@ -1,0 +1,35 @@
+```json
+{
+  "id": "ledger-T-V2-001",
+  "task_id": "T-V2",
+  "agent": "worker-b",
+  "provider": "codex",
+  "model": "GPT-6",
+  "strategy": "Single-asset momentum (synthetic)",
+  "assumptions": [
+    "Fictional symbol and illustrative fills only; this ledger is not an executed backtest.",
+    "A positive momentum signal initiates a long position in one asset; a later momentum reversal reduces the position.",
+    "traded_value is the sum of absolute qty * price across all trades.",
+    "Each fee is 0.0005 * qty * price."
+  ],
+  "trades": [
+    {
+      "id": "T-V2-001",
+      "symbol": "MOMENTUM-X",
+      "side": "buy",
+      "qty": 12,
+      "price": 80,
+      "fee": 0.48
+    },
+    {
+      "id": "T-V2-002",
+      "symbol": "MOMENTUM-X",
+      "side": "sell",
+      "qty": 7,
+      "price": 88,
+      "fee": 0.308
+    }
+  ],
+  "traded_value": 1576
+}
+```

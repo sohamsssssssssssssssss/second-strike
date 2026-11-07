@@ -1,5 +1,7 @@
 # Second Strike
 
+[![tests](https://github.com/sohamsssssssssssssssss/second-strike/actions/workflows/tests.yml/badge.svg)](https://github.com/sohamsssssssssssssssss/second-strike/actions/workflows/tests.yml)
+
 **Second Strike: a Switch room where a human approves a rule once and a gate agent enforces it on every agent's work. Worker first try 0/5 → 5/5 after one gate strike.**
 
 n=5, one worker, one model, gate triggered by a human mention. See [Results](#results) for caveats and [What we learned](#what-we-learned).

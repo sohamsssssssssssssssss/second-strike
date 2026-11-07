@@ -1,0 +1,22 @@
+{
+  "id": "example-missing-fees",
+  "task_id": "valid-01",
+  "agent": "fixture-author",
+  "provider": null,
+  "model": null,
+  "strategy": "synthetic",
+  "trades": [
+    {
+      "id": 1,
+      "symbol": "SYN1",
+      "side": "buy",
+      "qty": 100,
+      "price": 100
+    }
+  ],
+  "labels": {
+    "flawed": true,
+    "split": "example",
+    "origin": "synthetic checker fixture"
+  }
+}

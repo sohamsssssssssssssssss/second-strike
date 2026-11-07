@@ -1,0 +1,1 @@
+{"id":"ledger-T-V5-worker-b","task_id":"T-V5","agent":"worker-b","provider":"Codex","model":"unknown","strategy":"cash-neutral synthetic pairs","trades":[{"id":1,"symbol":"FICPA","side":"buy","qty":10,"price":100,"fee":0.5},{"id":2,"symbol":"FICPB","side":"sell","qty":5,"price":200,"fee":0.5}],"traded_value":2000}

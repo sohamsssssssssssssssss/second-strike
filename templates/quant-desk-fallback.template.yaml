@@ -1,0 +1,69 @@
+# P1 room setup; VERIFY import, model availability, and live worker responses.
+# same vendor, different models; choose distinct worker model IDs before creation.
+# Source: sandbox-quantum/switch examples/agent-templates/triage-pair.template.yaml and docs/TEMPLATES.md (main).
+version: 1
+params:
+  location:
+    type: location
+    default: local
+    input: advanced
+  bridge:
+    type: bridge
+    default: [$first]
+  worker_a_model:
+    type: string
+    required: true
+    description: "Installed Codex model for worker-a"
+  worker_b_model:
+    type: string
+    required: true
+    description: "Different installed Codex model for worker-b"
+agents:
+  - name: worker-a
+    description: "worker-a for Second Strike"
+    provider: codex
+    location: "{location}"
+    directory: "{$agents_dir}/second-strike-worker-a"
+    addressing: owner-agents
+    auto_mode: false
+    auto_approve: false
+    model: "{worker_a_model}"
+    instructions: "Produce synthetic backtest ledgers for tasks addressed to you. Return JSON following Second Strike Data Schema section 3 when the reviewer supplies it. State assumptions when a strategy is underspecified. Never claim a backtest was executed unless it was. Do not approve rules or grade your own work. No real trading, money, bookings, keys, or personal data."
+  - name: worker-b
+    description: "worker-b for Second Strike"
+    provider: codex
+    location: "{location}"
+    directory: "{$agents_dir}/second-strike-worker-b"
+    addressing: owner-agents
+    auto_mode: false
+    auto_approve: false
+    model: "{worker_b_model}"
+    instructions: "Produce synthetic backtest ledgers for tasks addressed to you. Return JSON following Second Strike Data Schema section 3 when the reviewer supplies it. State assumptions when a strategy is underspecified. Never claim a backtest was executed unless it was. Do not approve rules or grade your own work. No real trading, money, bookings, keys, or personal data."
+  - name: scribe
+    description: "scribe for Second Strike"
+    provider: codex
+    location: "{location}"
+    directory: "{$agents_dir}/second-strike-scribe"
+    addressing: owner-agents
+    auto_mode: false
+    auto_approve: false
+    instructions: "Draft rules only when the reviewer asks. Include what, why, scope, expiry, passing and failing examples, and checker. Only a human approves. P1 has no lifecycle implementation; do not claim a rule is active or a Decision exists. No secrets."
+  - name: gate
+    description: "gate for Second Strike"
+    provider: codex
+    location: "{location}"
+    directory: "{$agents_dir}/second-strike-gate"
+    addressing: owner-agents
+    auto_mode: false
+    auto_approve: false
+    instructions: "You are separate from the workers. Use offline deterministic checker scripts when implemented; never substitute your own guess for their results. In P1 those scripts are placeholders: report not implemented, never pass or fail. Later ambiguous natural-language checks must escalate to the human. No secrets."
+room:
+  name: quant-desk
+  description: Human-reviewed synthetic backtest ledgers
+  bridge: "{bridge}"
+  channel_type: channel_private
+  agents: [worker-a, worker-b, scribe, gate]
+  users: ["{$creator}"]
+  instructions: "P1 setup only. Human approval is required for rules. Do not claim checks, Decisions, or Rules integration exists yet. No secrets or real trades."
+kickoff: |
+  @worker-a @worker-b @scribe @gate: introduce your role in one line. This is P1 setup only; wait for the reviewer to assign work.

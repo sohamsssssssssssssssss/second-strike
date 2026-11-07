@@ -1,0 +1,1 @@
+Produce a synthetic JSON trade ledger for equal-weight equity rotation. Use fictional symbols, positive quantities and prices, and side buy or sell. Include id, task_id="T-V1", agent, provider, model, strategy, trades and traded_value. State assumptions. Do not execute trades or grade your output. Return JSON in a fenced code block.

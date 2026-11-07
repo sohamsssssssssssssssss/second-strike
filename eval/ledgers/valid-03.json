@@ -1,0 +1,23 @@
+{
+  "id": "valid-03",
+  "task_id": "valid-03",
+  "agent": "fixture-author",
+  "provider": null,
+  "model": null,
+  "strategy": "synthetic",
+  "trades": [
+    {
+      "id": 1,
+      "symbol": "SYN3",
+      "side": "buy",
+      "qty": 300,
+      "price": 100,
+      "fee": 15.0
+    }
+  ],
+  "labels": {
+    "flawed": false,
+    "split": "valid",
+    "origin": "synthetic checker fixture"
+  }
+}

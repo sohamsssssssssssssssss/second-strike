@@ -1,0 +1,17 @@
+# P4 pre-run freeze — 5 Nov 2026
+# These five prompt files and ten valid ledgers were hashed before any paired worker run.
+d080c78dc40604c8ec01922bd14106bc40de1440a6d8d56a31614a6143eb32ae  tasks/seeded/variant-01.txt
+0fe6c9307a04f6729f413c101693cfb5e3e80c2bc9da84d43695e43e8ca69e50  tasks/seeded/variant-02.txt
+9b05d2ef3d1c7be21178c256c8ba77f366e5ca552e939f448f93f3bcf0abdde6  tasks/seeded/variant-03.txt
+bac97d2caaf03d0537f9b95ad7698c75b0bbabb2b589e0a3eca11de64930a108  tasks/seeded/variant-04.txt
+20a5af9d91aa27a16cd69bf17df64eb3111c8710ba29aaa2b4c86fac69a237dd  tasks/seeded/variant-05.txt
+d8b5c094f4cd585b4076a81f9a1a3b22d8bcac85199bbebb1a79efcb609412ae  eval/ledgers/valid-01.json
+d3edee7f2b4b8c2aa8d1a392e6675f12314550e4e41eb959cb9c609f6dcd22d6  eval/ledgers/valid-02.json
+4070078d77425ac7564939660a5fb903251a6365226e0ac5d734b36683f417b5  eval/ledgers/valid-03.json
+4bbad2be74ea88d7714b0db61a4957cd9e75a1e1c8d87498f078bd784ac24f71  eval/ledgers/valid-04.json
+ad614bce017621f4f7dbb90463e532b324711ce14a348d0ae4b30e4aa4990e74  eval/ledgers/valid-05.json
+2db55b373054dc2d0b0337820300c23d016956074a5487b005c92640b3548019  eval/ledgers/valid-06.json
+059b9cb3ddd726d34df311c92aa6bbf12bc6fa61afe12da488e1138aa64bd921  eval/ledgers/valid-07.json
+b3df51675cd5f18c00ae9d2d31786855cde360ca729c29aeacb763765d0da9aa  eval/ledgers/valid-08.json
+770ca144bbbee09e9ec0b1ed9e5b0680f7d403af28cd61c9abb468459f9f81d9  eval/ledgers/valid-09.json
+5117247f4a655be5ce3a5b09f2f8bd392e35413d47f965d3751d703217feda59  eval/ledgers/valid-10.json

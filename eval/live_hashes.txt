@@ -1,0 +1,9 @@
+# Live P4 checker replay hashes — 5 Nov 2026
+# Treatment reply hash was captured before the documented rerun, but after one earlier checker invocation; see eval/results.md.
+3e888fd530160842b1c05456f680c7d20b373e9d66dd07024915095b9de06116  eval/ledgers/variant-01-treatment.json
+
+# Valid-ledger replay inputs were frozen in eval/frozen_hashes.txt before any checker run.
+# Their hashes were verified against that freeze before the documented rerun.
+131ad94df399aa8f027e6300686bc14e59c430a93fdde839fdccbc4e53003a76  eval/ledgers/variant-01-control.json
+3648063464f1bd1cbbf78e97666cfa13269f02e8cb7d35b386bd0069509e1956  eval/ledgers/variant-04-control-first.json
+71107f6c5596de36396c7540f76976eae5037099481f3d9cb6e8e9f5dc0afe53  eval/ledgers/variant-05-control-first.json

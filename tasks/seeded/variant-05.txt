@@ -1,0 +1,1 @@
+Produce a synthetic JSON trade ledger for cash-neutral synthetic pairs. Use fictional symbols, positive quantities and prices, and side buy or sell. Include id, task_id="T-V5", agent, provider, model, strategy, trades and traded_value. State assumptions. Do not execute trades or grade your output. Return JSON in a fenced code block.

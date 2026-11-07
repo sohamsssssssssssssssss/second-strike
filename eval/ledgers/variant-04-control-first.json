@@ -1,0 +1,19 @@
+{
+  "id": "L-T-V4-001",
+  "task_id": "T-V4",
+  "agent": "control-worker-fresh",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "mean-reversion basket",
+  "trades": [
+    {"symbol": "KORVA", "side": "buy", "quantity": 15, "price": 24.00},
+    {"symbol": "MYRIX", "side": "sell", "quantity": 8, "price": 45.00},
+    {"symbol": "TALVO", "side": "buy", "quantity": 10, "price": 18.50}
+  ],
+  "traded_value": 906.00,
+  "assumptions": [
+    "Symbols are fictional and prices are USD per unit.",
+    "This is a synthetic example; no trades were executed.",
+    "traded_value sums absolute notionals, excluding fees: 15 × 24 + 8 × 45 + 10 × 18.50 = 906 USD."
+  ]
+}

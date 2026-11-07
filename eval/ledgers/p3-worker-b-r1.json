@@ -1,0 +1,19 @@
+{
+  "id": "ledger-P3-R1-worker-b",
+  "task_id": "P3-R1-worker-b",
+  "agent": "worker-b",
+  "provider": "Codex",
+  "model": "unknown",
+  "strategy": "S1",
+  "trades": [
+    {
+      "id": 3,
+      "symbol": "LMN",
+      "side": "buy",
+      "qty": 40,
+      "price": 250,
+      "fee": 5
+    }
+  ],
+  "traded_value": 10000
+}

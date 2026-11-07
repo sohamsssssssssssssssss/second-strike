@@ -1,0 +1,10 @@
+# Keep credentials and local Python artifacts out of the submission.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store

@@ -1,0 +1,21 @@
+{
+  "id": "ledger-T-V1-001",
+  "task_id": "T-V1",
+  "agent": "control-worker-b",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "equal-weight equity rotation",
+  "assumptions": [
+    "Synthetic example; symbols and prices are fictional and denominated in USD.",
+    "Starting portfolio holds 100 shares of XOLD-A at $100 and 200 shares of XOLD-B at $50; no cash.",
+    "Sell both holdings and allocate the $20,000 proceeds equally to two new equities; prices remain fixed and fees, taxes and slippage are zero.",
+    "traded_value is the gross sum of quantity multiplied by price across buys and sells."
+  ],
+  "trades": [
+    {"symbol": "XOLD-A", "side": "sell", "quantity": 100, "price": 100},
+    {"symbol": "XOLD-B", "side": "sell", "quantity": 200, "price": 50},
+    {"symbol": "XNEW-C", "side": "buy", "quantity": 200, "price": 50},
+    {"symbol": "XNEW-D", "side": "buy", "quantity": 100, "price": 100}
+  ],
+  "traded_value": 40000
+}

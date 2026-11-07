@@ -1,0 +1,1 @@
+Produce a synthetic JSON trade ledger for mean-reversion basket. Use fictional symbols, positive quantities and prices, and side buy or sell. Include id, task_id="T-V4", agent, provider, model, strategy, trades and traded_value. State assumptions. Do not execute trades or grade your output. Return JSON in a fenced code block.

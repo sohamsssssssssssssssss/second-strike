@@ -1,0 +1,19 @@
+{
+  "id": "L-T-V5-001",
+  "task_id": "T-V5",
+  "agent": "control-worker-fresh",
+  "provider": "OpenAI",
+  "model": "GPT-6",
+  "strategy": "cash-neutral synthetic pairs",
+  "trades": [
+    {"symbol": "ZORIN", "side": "buy", "quantity": 12, "price": 40.00},
+    {"symbol": "PAVEX", "side": "sell", "quantity": 10, "price": 48.00}
+  ],
+  "traded_value": 960.00,
+  "assumptions": [
+    "Symbols are fictional and prices are USD per unit.",
+    "The pair is cash-neutral by equal long and short notionals: 12 × 40 = 10 × 48 = 480 USD on each side.",
+    "traded_value is the sum of absolute notionals, excluding fees: 480 + 480 = 960 USD.",
+    "This is a synthetic example; no trades were executed."
+  ]
+}

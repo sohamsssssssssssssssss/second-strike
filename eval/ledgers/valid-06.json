@@ -1,0 +1,23 @@
+{
+  "id": "valid-06",
+  "task_id": "valid-06",
+  "agent": "fixture-author",
+  "provider": null,
+  "model": null,
+  "strategy": "synthetic",
+  "trades": [
+    {
+      "id": 1,
+      "symbol": "SYN6",
+      "side": "sell",
+      "qty": 600,
+      "price": 100,
+      "fee": 30.0
+    }
+  ],
+  "labels": {
+    "flawed": false,
+    "split": "valid",
+    "origin": "synthetic checker fixture"
+  }
+}
